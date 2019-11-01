@@ -1,7 +1,7 @@
-import 'whatwg-fetch';
+import "whatwg-fetch";
 
 export function getUsers() {
-  return get('users');
+  return get("users");
 }
 
 function get(url) {
@@ -13,5 +13,5 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-  console.log(error);
+  console.log(error); // eslint-disable-line no-console
 }
