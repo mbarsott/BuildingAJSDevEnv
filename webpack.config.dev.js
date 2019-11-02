@@ -1,8 +1,9 @@
 import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default {
   debug: true,
-  devtool: "inlinde-source-map",
+  devtool: "inline-source-map",
   noInfo: false,
   entry: [path.resolve(__dirname, "src/index")],
   target: "web",
@@ -11,10 +12,16 @@ export default {
     publicPath: "/",
     filename: "bundle.js"
   },
-  plugins: [],
+  plugins: [
+    // Create HTML file that includes reference3 to bundled JS.
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      inject: true
+    })
+  ],
   module: {
     loaders: [
-      { test: /\.js$/, eclude: /node_modules/, loaders: ["babel"] },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ["babel"] },
       { test: /\.css$/, loaders: ["style", "css"] }
     ]
   }
