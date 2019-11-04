@@ -1,3 +1,13 @@
+<!--
+  **NOTE:** This is a template for index.html.
+  It useds ejs and htmlWEbpackPlugin to generate a different index.html fo reach environment.
+  htmlWEbpackPlugin will dynamically add references to the scripts and styles that it bundles
+  to this file. The generated bundles have hash-based filenames, so it's necessary to add the
+  references dynamically.
+  For more info on ejs, see https://www.embeddedjs.com
+  For examples of using it with htmlWebpackPlugin, see
+  https://github.com/jaketrent/html-webpack-template/blob/master/index.ejs
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,6 +15,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JS Dev Env</title>
+    <% if (htmlWebpackPlugin.options.trackJSToken) { %>
+      <!-- for more configuration options, see https://docs.trackjs.com -->
+      <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+      <script>
+        window.TrackJS && TrackJS.install({token: "<%=htmlWebpackPlugin.options.trackJSToken%>" });
+      </script>
+    <% } %>
   </head>
   <body>
     <!--h1>Hello World!</h1-->
@@ -17,7 +34,6 @@
         <th>Last Name</th>
         <th>Email</th>
         <tbody id="users">
-
         </tbody>
       </thead>
     </table>
