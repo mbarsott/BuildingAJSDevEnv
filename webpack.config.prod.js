@@ -3,6 +3,7 @@ import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import WebpackMd5Hash from "webpack-md5-hash";
 import ExtractTextPlugin from "extract-text-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 
 export default {
   debug: true,
@@ -19,6 +20,14 @@ export default {
     filename: "[name].[chunkhash].js"
   },
   plugins: [
+    // Copy files, like images or other needed files
+    new CopyPlugin([
+      {
+        from: "src/favicon.ico",
+        to: "favicon.ico"
+      }
+    ]),
+
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin("[name].[contenthash].css"),
 
